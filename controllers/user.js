@@ -15,7 +15,7 @@ const getAllUsers = async (req, res) => {
 //POST user
 const newUser = (req, res) => {
 	//check if the user email already exists in db
-	User.findOne({ email: req.body.email }, (err, data) => {
+	User.findOne({ username: req.body.username }, (err, data) => {
 		//if user not in db, add it
 		if (!data) {
 			//create a new user object using the User model and req.body
@@ -46,12 +46,7 @@ const newUser = (req, res) => {
 	})
 };
 
-//DELETE '/user'
-const deleteAllUsers = (req, res) => {
-	res.json({message: "DELETE all tea"});
-};
-
-//GET '/user/:username'
+//GET '/user/search'
 const getOneUser = (req, res) => {
 	User.findOne({username: req.query.username}, (err, data) => {
 		if(!data) {
@@ -61,14 +56,20 @@ const getOneUser = (req, res) => {
 	})
 };
 
-//POST '/user/:name'
-const newComment = (req, res) => {
-	res.json({message: "POST 1 tea comment"});
+//GET '/user/:username'
+const getUser = (req, res) => {
+	User.findOne({username: req.params.username}, (err, data) => {
+		if(!data) {
+			return res.json({message: "User does not exists"});
+		}
+		return res.json(data);
+	})
 };
 
+/*
 //DELETE '/user/:uesrname'
 const deleteOneUser = async (req, res) => {
-	const remUser = await User.findOne({username: req.query.username})
+	const remUser = await User.findOne({username: req.params.username})
 
     if(!remUser) {
         res.status(404).json({res: 'User not found'}).send()
@@ -76,9 +77,24 @@ const deleteOneUser = async (req, res) => {
     }
     await remUser.deleteOne()
     res.status(204).json({
-		res: 'Utente rimosso',
-	}).send()
-};
+		res: "Utente rimosso"
+	})
+	return;
+};*/
+
+const logoutUser = async (req, res) => {
+	const outUser = await User.findOne({username: req.params.username})
+
+    if(!outUser) {
+        res.status(404).json({res: 'User not found'}).send()
+        return;
+    }
+    await outUser.updateOne({status: false})
+    res.status(204).json({
+		res: "Logout effettuato"
+	})
+	return;
+}
 
 
 
@@ -86,8 +102,8 @@ const deleteOneUser = async (req, res) => {
 module.exports = {
 	getAllUsers,
 	newUser,
-	deleteAllUsers,
 	getOneUser,
-	newComment,
-	deleteOneUser
+	getUser,
+	logoutUser
+	//deleteOneUser
 };
