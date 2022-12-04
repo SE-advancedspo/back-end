@@ -5,7 +5,7 @@ const SpotSchema = new mongoose.Schema({
     id_spot: {type: Number, required: true}, // DC: necessary?
     testo: {type: String, required: true},
     autore: {type: String, required: true}, // DC: type: user?
-    num_voti: {type: Number, min: 0}, // DC: init to 0
+    num_voti: {type: Number, default: 0, min: 0},
     altezza: Number, 
     regione: String,
     colore_capelli: String,
