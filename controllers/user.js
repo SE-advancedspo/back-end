@@ -14,7 +14,7 @@ const getAllUsers = async (req, res) => {
 
 //POST user
 const newUser = (req, res) => {
-	//check if the user email already exists in db
+	//check if the user username already exists in db
 	User.findOne({ username: req.body.username }, (err, data) => {
 		//if user not in db, add it
 		if (!data) {
@@ -41,7 +41,7 @@ const newUser = (req, res) => {
 		//if there's an error or the user is in db, return a message
 		}else{
 			if(err) return res.json(`Something went wrong, please try again. ${err}`);
-			return res.json({message:"User already exists"});
+			return res.json({message: "User already exists"});
 		}
 	})
 };
@@ -83,17 +83,19 @@ const deleteOneUser = async (req, res) => {
 };*/
 
 const logoutUser = async (req, res) => {
-	const outUser = await User.findOne({username: req.params.username})
-
+	//const outUser = await User.findOne({username: req.params.username})
+	const outUser = await User.findOne({username: req.query.username})
+	
     if(!outUser) {
         res.status(404).json({res: 'User not found'}).send()
         return;
     }
-    await outUser.updateOne({status: false})
+	await outUser.updateOne({status: false})
     res.status(204).json({
 		res: "Logout effettuato"
 	})
-	return;
+	console.log("Logout effettuato");
+	return res;	
 }
 
 
