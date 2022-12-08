@@ -14,6 +14,5 @@ const SpotSchema = new mongoose.Schema({
     lang: String, // DC: it should be enum
 });
 
-
 const Spot = mongoose.model('spot', SpotSchema); //convert to model named spot
 module.exports = Spot; //export for controller use
