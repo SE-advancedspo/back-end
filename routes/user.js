@@ -6,6 +6,8 @@ const upload = multer();
 const userController = require('../controllers/user');
 const friendController = require('../controllers/friend');
 const spotController = require('../controllers/spot');
+const eventController = require('../controllers/evento');
+const user_eventController = require('../controllers/user_event');
 const auth = require('../controllers/auth');
 
 router.post('/user/auth', upload.none(), auth.auth);
@@ -13,6 +15,8 @@ router.post('/user/auth', upload.none(), auth.auth);
 //router.use(tokenChecker);
 router.get('/user', userController.getAllUsers);
 router.post('/user', upload.none(), userController.newUser);
+
+router.get('/evento', eventController.getAllEvents)
 
 //router.use(upload.none(), auth.tokenChecker)
 
@@ -30,8 +34,13 @@ router.post('/spot', upload.none(), spotController.newSpot);
 router.get('/spot', spotController.getAllSpots)
 router.get('/spot/id', upload.none(), spotController.getOneSpot)
 
-router.get('/evento/id', )
-router.post('/evento/id', )
-router.get('/evento', )
+router.get('/evento/id', upload.none(), eventController.getOneEvent)
+//router.post('/evento/:username', )
+
+router.post('/evento', upload.none(), eventController.newEvento)
+
+router.post('/evento/segui/:username', upload.none(), user_eventController.addUE)
+router.get('/evento/segui/:username', user_eventController.getUE)
+
 
 module.exports = router; // export to use in server.js

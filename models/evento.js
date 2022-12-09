@@ -2,11 +2,10 @@ const mongoose = require("mongoose"); //import mongoose
 
 // evento schema
 const EventoSchema = new mongoose.Schema({
-    id_evento: {type: Number, required: true}, // DC: necessary?
+    id_evento: {type: Number, required: true},
     nome: {type: String, required: true},
     data: {type: Date, required: true},
     luogo: {type: String, required: true},
-    salvato: Boolean,
 });
 
 
