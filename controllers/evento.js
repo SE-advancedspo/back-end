@@ -18,8 +18,14 @@ const newEvento = (req, res) => {
 
 const getAllEvents = async (req, res) => {
 	let events = await Evento.find({});
+	console.log(events)
 	events = events.map( (event) => {
-		return { event };
+		return { 
+			id_evento: event.id_evento,
+			nome: event.nome,
+			data: event.data.getDay(),//+"/"+event.data.getMonth()+"/"+event.data.getYear()+" "+event.data.getHours() + ":"+ event.data.getMinutes(),
+			luogo: event.luogo
+		 };
 	});
 	res.status(200).json(events);
 };
