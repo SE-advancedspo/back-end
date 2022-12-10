@@ -34,7 +34,7 @@ const newUser = (req, res) => {
 				status: true,
 			})
 			// save this object to database
-			newUser.save((err, data)=>{
+			newUser.save((err, data)=>{	
 				if(err) return res.json({Error: err});
 				return res.json(data);
 			})
