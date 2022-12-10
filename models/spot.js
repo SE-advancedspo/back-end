@@ -11,7 +11,7 @@ const SpotSchema = new mongoose.Schema({
     colore_capelli: String,
     barba: Boolean,
     facolta: String,
-    lang: String, //vn: dovrebbe essere required
+    lang: String,
 });
 
 

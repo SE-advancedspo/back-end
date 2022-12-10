@@ -1,3 +1,4 @@
+const moment = require('moment')
 const Evento = require('../models/evento')
 
 // Non previsto nelle API, serve a noi per aggiungere eventi
@@ -18,14 +19,14 @@ const newEvento = (req, res) => {
 
 const getAllEvents = async (req, res) => {
 	let events = await Evento.find({});
-	console.log(events)
 	events = events.map( (event) => {
-		return { 
+		var data = moment(event.data).format('DD/MM/YYYY HH:mm')
+		return {
 			id_evento: event.id_evento,
 			nome: event.nome,
-			data: event.data.getDay(),//+"/"+event.data.getMonth()+"/"+event.data.getYear()+" "+event.data.getHours() + ":"+ event.data.getMinutes(),
+			data: data,
 			luogo: event.luogo
-		 };
+		};
 	});
 	res.status(200).json(events);
 };
