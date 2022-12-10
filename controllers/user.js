@@ -36,7 +36,7 @@ const newUser = (req, res) => {
 			// save this object to database
 			newUser.save((err, data)=>{
 				if(err) return res.json({Error: err});
-				return res.json(data);
+				return res.json({message: "Utente registrato con successo"});
 			})
 		//if there's an error or the user is in db, return a message
 		}else{
