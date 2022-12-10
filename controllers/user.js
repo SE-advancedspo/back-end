@@ -1,5 +1,6 @@
 const User = require('../models/user')
 
+
 //GET '/user'
 const getAllUsers = async (req, res) => {
 	let users = await User.find({});
@@ -14,6 +15,7 @@ const getAllUsers = async (req, res) => {
 
 //POST user
 const newUser = (req, res) => {
+	console.log(req);
 	//check if the user email already exists in db
 	User.findOne({ username: req.body.username }, (err, data) => {
 		//if user not in db, add it
