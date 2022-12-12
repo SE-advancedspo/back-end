@@ -16,5 +16,8 @@
     "moment": "^2.29.4",
     "mongoose-express-api": "^0.0.3",
     "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "supertest": "^6.3.3"
   }
 }
