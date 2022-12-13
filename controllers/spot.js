@@ -1,9 +1,13 @@
 const Spot = require('../models/spot')
+const User = require('../models/user')
 
-const newSpot = (req, res) => {
+const newSpot = async (req, res) => {
 
-    // Metto il controllo che l'autore esiste?
+    const exists = await User.findOne({
+        username: req.body.autore,
+    });
 	
+	if(exists) {
 		//create a new user object using the User model and req.body
 		const newSpot = new Spot({
             id_spot: req.body.id,
@@ -22,6 +26,9 @@ const newSpot = (req, res) => {
 			if(err) return res.json({Error: err});
 			return res.json(data);
 		})
+	}
+	else
+		return res.json({message: "Impossibile creare lo spot"})
 };
 
 const getAllSpots = async (req, res) => {
