@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const supertest = require("supertest"); 
 const app = require('../app');
 const request = require('supertest');
 
