@@ -7,11 +7,11 @@ const addLike = async (req, res) => {
         username: req.params.username,
     });
     const existsS = await Spot.findOne({
-        _id: req.query.id,
+        id_spot: req.query.id,
     });
     const existsL = await User_Like.findOne({
         username: req.params.username,
-        _id: req.query.id,
+        id_spot: req.query.id,
     });
 
     if(!existsL) {
@@ -42,7 +42,7 @@ const removeLike = async (req, res) => {
 
     if(existsL) {
         const spot = await Spot.findOne({
-            _id: req.query.id
+            id_spot: req.query.id
         })
 	    const remLike = User_Like.findOne ({
 		    username: req.params.username,
