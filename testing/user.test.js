@@ -2,15 +2,11 @@ const fetch = require("node-fetch");
 const app = require('../app');
 const request = require('supertest');
 
-let url = "http://localhost:8080"
 let url2 = "http://localhost:8080"
 
 describe('test-coverage degli user', () => {
-    url += "/user"
     test('Funziona la get di tutti gli users', async () => {
-        
-        expect.assertions(1)
-        expect((await fetch(url)).status).toEqual(200)
+        const res=await request(url2).get("/user").expect(200)
     })
     test('Registrazione di un utente correttamente', async () => {
         var payload={
@@ -57,7 +53,6 @@ describe('test-coverage degli user', () => {
         }
         let res= (await request(url2)).post("/user/auth?username=Francesco1&password=verde32").send(payload).expect(200); 
         let token=(await res).body.token
-        console.log(token)
         res=await request(url2).get('/user/search?username=Francesco1&token='+token).expect(200);
         expect(res.body).toEqual({
             _id: '63946406673a91aeb485e1dd',
@@ -74,3 +69,4 @@ describe('test-coverage degli user', () => {
 
 
 });
+
