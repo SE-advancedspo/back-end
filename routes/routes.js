@@ -19,7 +19,8 @@ router.post('/user', upload.none(), userController.newUser);
 
 router.get('/evento', eventController.getAllEvents)
 
-router.use(upload.none(), auth.tokenChecker)
+// Token
+//router.use(upload.none(), auth.tokenChecker)
 
 router.get('/user/search', userController.getOneUser);
 
@@ -32,7 +33,7 @@ router.delete('/friend/:username', upload.none(), friendController.removeFriend)
 router.get('/friend/:username', friendController.getFriends)
 
 router.post('/spot', upload.none(), spotController.newSpot);
-router.get('/spot/:username', spotController.getAllSpots)
+router.get('/spot/', spotController.getAllSpots)
 router.get('/spot/id', upload.none(), spotController.getOneSpot)
 
 router.post('/spot/like/:username', upload.none(), user_likeController.addLike);

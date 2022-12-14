@@ -3,7 +3,7 @@ const mongoose = require("mongoose"); //import mongoose
 // evento schema
 const User_EventSchema = new mongoose.Schema({
     username: {type: String, required: true},
-    id_evento: {type: Number, required: true},
+    id_evento: {type: String, required: true},
 });
 
 
