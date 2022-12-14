@@ -7,18 +7,18 @@ const addLike = async (req, res) => {
         username: req.params.username,
     });
     const existsS = await Spot.findOne({
-        id_spot: req.query.id,
+        _id: req.query.id,
     });
     const existsL = await User_Like.findOne({
         username: req.params.username,
-        id_spot: req.query.id,
+        _id: req.query.id,
     });
 
     if(!existsL) {
         if(existsU && existsS) {
 	        const newLike = new User_Like ({
 		        username: req.params.username,
-    		    id_spot: req.query.id,
+                _id: req.query.id,
 	        })
             var numLikes = existsS.num_like + 1;
             await existsS.updateOne({num_like: numLikes});

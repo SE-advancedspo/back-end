@@ -10,18 +10,18 @@ const addUE = async (req, res) => {
         id_evento: req.body.id,
     });
 
-    if(existsU && existsE) {
+    /*if(existsU && existsE) {
 	    const newUE = new User_Event ({
 		    username: req.params.username,
-		    id_evento: req.body.id,
+		    _id: req.body.id,
 	    })
 	    newUE.save((err, data)=>{
 		    if(err) return res.json({Error: err});
 		    return res.json(data);
 	    })
     }
-    else
-        return res.status(400).json({res: 'User or event does not exist'}).send()
+    else*/
+    res.status(400).json({res: 'User or event does not exist'}).send()
 };
 
 const getUE = async (req, res) => {
@@ -36,7 +36,7 @@ const getUE = async (req, res) => {
         };
     });
     for(let i = 0; i < ue.length; i++) {
-        let tmp = await Evento.findOne({id_evento: ue[i].id_evento})
+        let tmp = await Evento.findOne({_id: ue[i].id_evento})
         ue[i].evento = tmp
     }
     res.status(200).json(ue);
