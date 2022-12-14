@@ -3,12 +3,12 @@ const User = require('../models/user'); // get our mongoose model
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 const auth = async function(req, res) {
-    let user = await User.findOne({email: req.body.email}).exec();
+    let user = await User.findOne({username: req.query.username}).exec();
 
     if(!user) {
         res.json({success: false, message: 'Authentication failed. User not found'});
     }
-    if (user.password != req.body.password) {
+    if (user.password != req.query.password) {
         res.json({ success: false, message: 'Authentication failed. Wrong password.' });
     }
 
@@ -36,8 +36,12 @@ const auth = async function(req, res) {
 
 /* Problem with undefined toke!! */
 const tokenChecker = function(req, res, next) {
+    var token;
     // header or url parameters or post parameters
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if(req.body.token != undefined)
+        token = req.body.token || req.query.token
+    else
+        token = req.query.token
     if (!token) res.status(401).json({success:false,message:'No token provided.'})
     
     // decode token, verifies secret and checks expiration

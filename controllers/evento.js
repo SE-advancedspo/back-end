@@ -5,7 +5,6 @@ const Evento = require('../models/evento')
 const newEvento = (req, res) => {
 
 		const newEvento = new Evento({
-            id_evento: req.body.id,
             nome: req.body.nome,
             data: req.body.data,
             luogo: req.body.luogo
@@ -22,7 +21,7 @@ const getAllEvents = async (req, res) => {
 	events = events.map( (event) => {
 		var data = moment(event.data).format('DD/MM/YYYY HH:mm')
 		return {
-			id_evento: event.id_evento,
+			id_evento: event._id,
 			nome: event.nome,
 			data: data,
 			luogo: event.luogo
@@ -32,7 +31,7 @@ const getAllEvents = async (req, res) => {
 };
 
 const getOneEvent = (req, res) => {
-	Evento.findOne({id_evento: req.query.id}, (err, data) => {
+	Evento.findOne({_id: req.query.id}, (err, data) => {
 		if(!data) {
 			return res.json({message: "Event does not exists"});
 		}
