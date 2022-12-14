@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 const auth = async function(req, res) {
     let user = await User.findOne({username: req.body.username}).exec();
-    console.log("ciao"+user);
     if(!user) {
         res.json({success: false, message: 'Authentication failed. User not found'});
     }

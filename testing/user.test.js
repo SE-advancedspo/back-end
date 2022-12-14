@@ -14,7 +14,7 @@ describe('test-coverage degli user', () => {
     })
     test('Registrazione di un utente correttamente', async () => {
         var payload={
-            "username": "Beenc2xa14",
+            "username": "Beenc2xa_14",
             "email": "franceslini@gmail.com",
             "password": "verde32",
             "contatto": "telegram.com"    
@@ -51,11 +51,13 @@ describe('test-coverage degli user', () => {
         expect(res.body.Error.errors.username.name).toEqual("ValidatorError");
     })
     test('Get di uno user specifico', async () => {
-        
-        let res=await request(url2).post("/user/auth?username=Francesco1&password=verde32").expect(200); 
-        let token=res.body.token
+        var payload={
+            "username" : "Francesco1",
+            "password" : "verde32"
+        }
+        let res= (await request(url2)).post("/user/auth?username=Francesco1&password=verde32").send(payload).expect(200); 
+        let token=(await res).body.token
         console.log(token)
-        /* console.log(res)
         res=await request(url2).get('/user/search?username=Francesco1&token='+token).expect(200);
         expect(res.body).toEqual({
             _id: '63946406673a91aeb485e1dd',
@@ -65,7 +67,7 @@ describe('test-coverage degli user', () => {
             contatto: 'telegram.com',
             status: true,
             __v: 0
-          }); */
+          }); 
             
     })
 
