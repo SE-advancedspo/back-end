@@ -6,18 +6,25 @@ const addFriend = async (req, res) => {
         username: req.body.friend_username,
     });
 
-    if(exists) {
-	    const newFriend = new Friend ({
-		    username: req.params.username,
-		    friend_username: req.body.friend_username,
-	    })
-	    newFriend.save((err, data)=>{
-		    if(err) return res.json({Error: err});
-		    return res.json(data);
-	    })
-    }
-    else
-        return res.status(400).json({res: 'User does not exist'}).send()
+  const existsF = await Friend.findOne({
+    username: req.params.username,
+    friend_username: req.body.friend_username,
+  })
+
+  if(exists && !existsF) {
+	  const newFriend = new Friend ({
+	    username: req.params.username,
+	    friend_username: req.body.friend_username,
+    })
+	  newFriend.save((err, data)=>{
+	    if(err) return res.json({Error: err});
+	    return res.json(data);
+    })
+  }
+  else if(!exists)
+      return res.status(400).json({res: 'User does not exist'}).send()
+  else
+      return res.status(400).json({res: 'Friend already added'}).send()
 };
 
 const removeFriend = async (req, res) => {
