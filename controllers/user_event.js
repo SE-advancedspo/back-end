@@ -7,15 +7,25 @@ const addUE = async (req, res) => {
         username: req.params.username,
     });
     
-    const existsE = await Evento.findOne({
-        _id: req.body.id,
+  var existsE;
+  if(req.query.id.length == 24) {
+    existsE = await Evento.findOne({
+        _id: req.query.id,
     });
-    
+  }
+  else
+    existsE = false;
 
+  const existsUE = await User_Event.findOne({
+    username: req.params.username,
+    id_evento: req.query.id
+  })
+    
+  if(!existsUE) {
     if(existsU && existsE) {
 	    const newUE = new User_Event ({
 		    username: req.params.username,
-		    id_evento: req.body.id,
+		    id_evento: req.query.id,
 	    })
 	    newUE.save((err, data)=>{
 		    if(err) return res.json({Error: err});
@@ -23,7 +33,10 @@ const addUE = async (req, res) => {
 	    })
     }
     else
-    res.status(400).json({res: 'User or event does not exist'}).send()
+      res.status(400).json({res: 'User or event does not exist'}).send()
+  }
+  else
+    res.status(400).json({res: 'You already follow this event'}).send()
 };
 
 const getUE = async (req, res) => {

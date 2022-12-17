@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const auth = async function(req, res) {
     let user = await User.findOne({username: req.body.username}).exec();
     if(!user) {
-        res.json({success: false, message: 'Authentication failed. User not found'});
+        return res.json({success: false, message: 'Authentication failed. User not found'});
     }
     
     if (user.password != req.body.password) {
-        res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+        return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
     }
 
     // if user is found and password is right create a token
@@ -37,8 +37,12 @@ const auth = async function(req, res) {
 /* Problem with undefined toke!! */
 const tokenChecker = function(req, res, next) {
     // header or url parameters or post parameters
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (!token) res.status(401).json({success:false,message:'No token provided.'})
+  var token
+  if(req.body.token != undefined)
+    token = req.body.token
+  else if(req.query.token != undefined)
+    token = req.query.token
+  if (!token) res.status(401).json({success:false,message:'No token provided.'})
     
     // decode token, verifies secret and checks expiration
     jwt.verify(token, process.env.SUPER_SECRET, function(err, decoded) {
