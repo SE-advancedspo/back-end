@@ -37,13 +37,15 @@ const auth = async function(req, res) {
 /* Problem with undefined toke!! */
 const tokenChecker = function(req, res, next) {
     // header or url parameters or post parameters
-  var token
-  if(req.body.token != undefined)
-    token = req.body.token
-  else if(req.query.token != undefined)
-    token = req.query.token
-  if (!token) res.status(401).json({success:false,message:'No token provided.'})
-    
+    let token
+    if(req.headers.authorization != undefined)
+        token = req.headers.authorization
+    if(req.body.token != undefined)
+        token = req.body.token
+    else if(req.query.token != undefined)
+        token = req.query.token
+    if (!token) res.status(401).json({success:false,message:'No token provided.'})
+        
     // decode token, verifies secret and checks expiration
     jwt.verify(token, process.env.SUPER_SECRET, function(err, decoded) {
         if (err) res.status(403).json({success:false,message:'Token not valid'})
