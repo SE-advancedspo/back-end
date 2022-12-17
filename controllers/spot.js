@@ -10,13 +10,13 @@ const newSpot = async (req, res) => {
 	
 	if(exists) {
 		let desc
-              if(req.body.dec == undefined)
-                       desc = 'none'
-               if(req.body.lang == undefined)
-                       desc = 'Italiano'
+		let lang
+		if(req.body.dec == undefined)
+				desc = 'none'
+		if(req.body.lang == undefined)
+				lang = 'Italiano'
 		//create a new user object using the User model and req.body
 		const newSpot = new Spot({
-            
             testo: req.body.testo,
             autore: req.body.autore,
             num_like: req.body.num_like,
