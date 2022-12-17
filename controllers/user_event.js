@@ -57,7 +57,24 @@ const getUE = async (req, res) => {
     res.status(200).json(ue);
 };
 
+const remUE = async (req, res) => {
+  const UE = await User_Event.findOne({
+    username: req.params.username,
+    id_evento: req.query.id
+  })
+    
+  if(UE) {
+    UE.deleteOne((err)=>{
+	    if(err) return res.json({Error: err});
+	    return res.json({message: "Follow rimosso con successo"});
+    })
+  }
+  else
+    res.status(400).json({res: 'You do not follow this event'}).send()
+};
+
 module.exports = {
-    addUE,
-    getUE
+  addUE,
+  getUE,
+  remUE
 };

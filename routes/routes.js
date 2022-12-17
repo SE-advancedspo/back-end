@@ -45,5 +45,6 @@ router.post('/evento', upload.none(), eventController.newEvento)
 
 router.post('/evento/segui/:username', upload.none(), user_eventController.addUE)
 router.get('/evento/segui/:username', user_eventController.getUE)
+router.delete('/evento/segui/:username', user_eventController.remUE)
 
 module.exports = router; // export to use in server.js
