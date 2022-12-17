@@ -35,20 +35,17 @@ const addLike = async (req, res) => {
 };
 
 const removeLike = async (req, res) => {
-    const existsL = await User_Like.findOne({
+    const remLike = await User_Like.findOne({
         username: req.params.username,
         id_spot: req.body.id,
     });
 
-    if(existsL) {
+    if(remLike) {
         const spot = await Spot.findOne({
             id_spot: req.body.id
         })
-	    const remLike = User_Like.findOne ({
-		    username: req.params.username,
-    	  id_spot: req.body.id,
-	    })
-        var numLikes = spot.num_like - 1;
+        if(spot.num_like - 1 >= 0)
+            var numLikes = spot.num_like - 1;
         await spot.updateOne({num_like: numLikes})
         remLike.deleteOne((err, data)=>{
 	        if(err) return res.json({Error: err});
@@ -59,7 +56,21 @@ const removeLike = async (req, res) => {
         return res.status(400).json({res: 'Like does not exists'}).send()
 };
 
+const getLikes = async (req, res) => {
+    let likes = await User_Like.find({
+            username: req.params.username
+    }).exec();
+
+    likes = likes.map((dbEntry) => {
+        return {
+            id_spot: dbEntry.id_spot,
+        };
+    });
+    res.status(200).json(ue);
+};
+
 module.exports = {
     addLike,
-    removeLike
+    removeLike,
+    getLikes
 };

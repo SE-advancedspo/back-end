@@ -35,6 +35,8 @@ router.post('/spot', upload.none(), spotController.newSpot);
 router.get('/spot', spotController.getAllSpots)
 router.get('/spot/id', upload.none(), spotController.getOneSpot)
 
+
+router.get('/spot/like/:username', user_likeController.getLikes);
 router.post('/spot/like/:username', upload.none(), user_likeController.addLike);
 router.delete('/spot/like/:username', upload.none(), user_likeController.removeLike);
 
