@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"); //import mongoose
 
-// evento schema
+// evento schemacomunque probabilimete 
 const EventoSchema = new mongoose.Schema({
     nome: {type: String, required: true},
     data: {type: Date, required: true},
