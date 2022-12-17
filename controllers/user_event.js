@@ -8,9 +8,9 @@ const addUE = async (req, res) => {
     });
     
   var existsE;
-  if(req.query.id.length == 24) {
+  if(req.body.id.length == 24) {
     existsE = await Evento.findOne({
-        _id: req.query.id,
+        _id: req.body.id,
     });
   }
   else
@@ -18,14 +18,14 @@ const addUE = async (req, res) => {
 
   const existsUE = await User_Event.findOne({
     username: req.params.username,
-    id_evento: req.query.id
+    id_evento: req.body.id
   })
     
   if(!existsUE) {
     if(existsU && existsE) {
 	    const newUE = new User_Event ({
 		    username: req.params.username,
-		    id_evento: req.query.id,
+		    id_evento: req.body.id,
 	    })
 	    newUE.save((err, data)=>{
 		    if(err) return res.json({Error: err});
@@ -60,7 +60,7 @@ const getUE = async (req, res) => {
 const remUE = async (req, res) => {
   const UE = await User_Event.findOne({
     username: req.params.username,
-    id_evento: req.query.id
+    id_evento: req.body.id
   })
     
   if(UE) {

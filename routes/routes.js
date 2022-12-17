@@ -19,7 +19,7 @@ router.post('/user', upload.none(), userController.newUser);
 
 router.get('/evento', eventController.getAllEvents)
 
-router.use(upload.none(), auth.tokenChecker)
+//router.use(upload.none(), auth.tokenChecker)
 
 router.get('/user/search', userController.getOneUser);
 
