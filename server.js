@@ -2,10 +2,12 @@ const dotenv = require('dotenv').config()
 const express=require('express')
 const app=express()
 const mongoose = require('mongoose')
+
+// NOTE: Swagger
 const swaggerUi = require('swagger-ui-express')
 var bodyParser = require('body-parser');
-swaggerDocument = require('../swagger.json');
-
+swaggerDocument = require('./swagger.json');
+// BUG: Does not start swagger
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(
