@@ -66,7 +66,7 @@ const getLikes = async (req, res) => {
             id_spot: dbEntry.id_spot,
         };
     });
-    res.status(200).json(ue);
+    res.status(200).json(likes);
 };
 
 module.exports = {
