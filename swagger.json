@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.0.0", //version of the OpenAPI Specification
     "title": "Tn2Night",
     "description": "API progetto di ingegneria del software",
     "license": {
@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3000",
+  "host": "localhost:8000",
   "basePath": "/",
   "tags": [{
     "name": "Users",
