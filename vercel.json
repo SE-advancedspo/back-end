@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "name": "tn2night",
+    "build": [
+        {"src": "script.js", "use": "@vercel/node"}
+    ],
+    "routes": [
+        {"src": "/(.*)", "dest": "/server.js"}
+    ]
+}
