@@ -31,7 +31,7 @@ describe('test-coverage degli user', () => {
         const res=await request(url2).post('/user')
         .set('Content-type', 'application/json')
         .send( payload )
-        .expect(200);
+        .expect(400);
         expect(res.body.message).toEqual("User already exists");
     })
     test('Inserimento di un utente senza specifico username', async () => {
