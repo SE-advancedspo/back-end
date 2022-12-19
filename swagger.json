@@ -27,7 +27,7 @@
         "parameters": [{
           "in": "body",
           "name": "username",
-          "description": "User's password"
+          "description": "User's username"
         },
         {
           "in": "body",
@@ -74,7 +74,7 @@
       }
     },
 
-    "/user/:username": {
+    "/user/{username}": {
       "get": {
         "tags": ["User"],
         "summary": "Get the logged user profile",
@@ -98,7 +98,7 @@
       }
     },
 
-    "/friend/:username": {
+    "/friend/{username}": {
       "post": {
         "tags": ["User", "Friend"],
         "summary": "Adda a user as a friend",
@@ -132,7 +132,59 @@
         "parameters": [],
         "responses": {}
       }
+    },
+
+    "/spot/id": {
+      "get": {
+        "tags": ["Spot"],
+        "summary": "Get on spot specifying its id",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+
+    "/spot/like/{username}": {
+      "get": {
+        "tags": ["User_Like"],
+        "summary": "Get all the spots liked by the user",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": ["User_Like"],
+        "summary": "User adds a like to a specific spot",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "tags": ["User_Like"],
+        "summary": "User removes a like to a specific spot",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+
+    "/evento/segui/{username}": {
+      "post": {
+        "tags": ["User_Event"],
+        "summary": "User follow a specific event",
+        "parameters": [],
+        "responses": {}
+      },
+      "get": {
+        "tags": ["User_Event"],
+        "summary": "Get events followed by user",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "tags": ["User_Event"],
+        "summary": "Users unfollows a specific event",
+        "parameters": [],
+        "responses": {}
+      }
     }
+
   },
 
   "definitions": {

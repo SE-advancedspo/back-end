@@ -5,14 +5,14 @@ const Evento = require('../models/evento')
 const newEvento = (req, res) => {
 
 		const newEvento = new Evento({
-            nome: req.body.nome,
-            data: req.body.data,
-            luogo: req.body.luogo
+      nome: req.body.nome,
+      data: req.body.data,
+      luogo: req.body.luogo
 		})
 		// save this object to database
 		newEvento.save((err, data)=>{
-			if(err) return res.json({Error: err});
-			return res.json(data);
+			if(err) return res.status(400).json({Error: err});
+			return res.status(201).json(data);
 		})
 };
 
@@ -33,9 +33,9 @@ const getAllEvents = async (req, res) => {
 const getOneEvent = (req, res) => {
 	Evento.findOne({_id: req.query.id}, (err, data) => {
 		if(!data) {
-			return res.json({message: "Event does not exists"});
+			return res.status(404).json({message: "Event does not exists"});
 		}
-		return res.json(data);
+		return res.status(200).json(data);
 	})
 };
 

@@ -17,33 +17,33 @@ const newSpot = async (req, res) => {
 				lang = 'Italiano'
 		//create a new user object using the User model and req.body
 		const newSpot = new Spot({
-            testo: req.body.testo,
-            autore: req.body.autore,
-            num_like: req.body.num_like,
-            lang: req.body.lang,
+      testo: req.body.testo,
+      autore: req.body.autore,
+      num_like: req.body.num_like,
+      lang: req.body.lang,
 			desc: req.body.desc
 		})
 		// save this object to database
 		newSpot.save((err, data)=>{
-			if(err) return res.json({Error: err});
-			return res.json({message: "Spot creato con successo"});
+			if(err) return res.status(400).json({Error: err});
+			return res.status(201).json({message: "Spot creato con successo"});
 		})
 	}
 	else
-		return res.json({message: "Impossibile creare lo spot"})
+		return res.status(400).json({message: "Impossibile creare lo spot"})
 };
 
 const getAllSpots = async (req, res) => {
 	let spots = await Spot.find({});
 	spots = spots.map( (spot) => {
 		return {
-		                       id_spot: spot._id.toString(),
-			                       testo: spot.testo,
-			                       autore: spot.autore,
-			                       num_like: spot.num_like,
-			                       desc: spot.desc,
-			                       lang: spot.lang,
-			               };
+		  id_spot: spot._id.toString(),
+			testo: spot.testo,
+			autore: spot.autore,
+			num_like: spot.num_like,
+			desc: spot.desc,
+			lang: spot.lang,
+		};
 	});
 	res.status(200).json(spots);
 };
@@ -51,9 +51,9 @@ const getAllSpots = async (req, res) => {
 const getOneSpot = (req, res) => {
 	Spot.findOne({_id: req.query.id}, (err, data) => {
 		if(!data) {
-			return res.json({message: "Spot does not exists"});
+			return res.status(404).json({message: "Spot does not exists"});
 		}
-		return res.json(data);
+		return res.status(200).json(data);
 	})
 };
 
