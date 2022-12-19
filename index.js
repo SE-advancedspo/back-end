@@ -8,9 +8,8 @@ app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `)
 })
 
-app.get('/', (req, res) => {
-  res.send('Hey our API is running 🥳')
-})
+const routes = require('./routes/routes')
+app.use('/', routes)
 
 // Export the Express API
 module.exports = app
