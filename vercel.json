@@ -1,10 +1,16 @@
 {
     "version": 2,
-    "name": "tn2night",
-    "build": [
-        {"src": "script.js", "use": "@vercel/node"}
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@now/node"
+      }
     ],
     "routes": [
-        {"src": "/(.*)", "dest": "/server.js"}
+      {
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
     ]
-}
+  }
+  
