@@ -4,7 +4,7 @@ const app=express()
 const mongoose = require('mongoose')
 const swaggerUi = require('swagger-ui-express')
 var bodyParser = require('body-parser');
-swaggerDocument = require('../swagger.json');
+swaggerDocument = require('./swagger.json');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
