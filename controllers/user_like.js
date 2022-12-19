@@ -23,12 +23,12 @@ const addLike = async (req, res) => {
             var numLikes = existsS.num_like + 1;
             await existsS.updateOne({num_like: numLikes});
 	        newLike.save((err, data)=>{
-		        if(err) return res.json({Error: err});
-		        return res.json(data);
+		        if(err) return res.status(400).json({Error: err});
+		        return res.status(201).json(data);
 	        })
         }
         else
-            return res.status(400).json({res: 'User or spot does not exist'}).send()
+            return res.status(404).json({res: 'User or spot does not exist'}).send()
     }
     else
         return res.status(400).json({res: 'Spot already liked'}).send()
@@ -48,12 +48,12 @@ const removeLike = async (req, res) => {
             var numLikes = spot.num_like - 1;
         await spot.updateOne({num_like: numLikes})
         remLike.deleteOne((err, data)=>{
-	        if(err) return res.json({Error: err});
-	        return res.json(data);
+	        if(err) return res.status(400).json({Error: err});
+	        return res.status(204).json(data);
         })
     }
     else
-        return res.status(400).json({res: 'Like does not exists'}).send()
+        return res.status(404).json({res: 'Like does not exists'}).send()
 };
 
 const getLikes = async (req, res) => {

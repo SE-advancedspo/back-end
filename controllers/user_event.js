@@ -28,12 +28,12 @@ const addUE = async (req, res) => {
 		    id_evento: req.body.id,
 	    })
 	    newUE.save((err, data)=>{
-		    if(err) return res.json({Error: err});
-		    return res.json(data);
+		    if(err) return res.status(400).json({Error: err});
+		    return res.status(201).json(data);
 	    })
     }
     else
-      res.status(400).json({res: 'User or event does not exist'}).send()
+      res.status(404).json({res: 'User or event does not exist'}).send()
   }
   else
     res.status(400).json({res: 'You already follow this event'}).send()
@@ -66,7 +66,7 @@ const remUE = async (req, res) => {
   if(UE) {
     UE.deleteOne((err)=>{
 	    if(err) return res.json({Error: err});
-	    return res.json({message: "Follow rimosso con successo"});
+	    return res.status(204).json({message: "Follow rimosso con successo"});
     })
   }
   else

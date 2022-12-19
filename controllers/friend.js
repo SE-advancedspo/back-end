@@ -17,12 +17,12 @@ const addFriend = async (req, res) => {
 	    friend_username: req.body.friend_username,
     })
 	  newFriend.save((err, data)=>{
-	    if(err) return res.json({Error: err});
-	    return res.json(data);
+	    if(err) return res.status(400).json({Error: err});
+	    return res.status(201).json(data);
     })
   }
   else if(!exists)
-      return res.status(400).json({res: 'User does not exist'}).send()
+      return res.status(404).json({res: 'User does not exist'}).send()
   else
       return res.status(400).json({res: 'Friend already added'}).send()
 };

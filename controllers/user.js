@@ -36,12 +36,12 @@ const newUser = (req, res) => {
 			// save this object to database
 			newUser.save((err, data)=>{
 				if(err) return res.json({Error: err});
-				return res.json({message: "Utente registrato con successo"});
+				return res.status(201).json({message: "Utente registrato con successo"});
 			})
 		//if there's an error or the user is in db, return a message
 		}else{
-			if(err) return res.json(`Something went wrong, please try again. ${err}`);
-			return res.json({message:"User already exists"});
+			if(err) return res.status(400).json('Something went wrong, please try again. ${err}');
+			return res.status(400).json({message:"User already exists"});
 		}
 	})
 };
@@ -50,9 +50,9 @@ const newUser = (req, res) => {
 const getOneUser = (req, res) => {
 	User.findOne({username: req.query.username}, (err, data) => {
 		if(!data) {
-			return res.json({message: "User does not exists"});
+			return res.status(404).json({message: "User does not exists"});
 		}
-		return res.json(data);
+		return res.status(200).json(data);
 	})
 };
 
@@ -60,9 +60,9 @@ const getOneUser = (req, res) => {
 const getUser = (req, res) => {
 	User.findOne({username: req.params.username}, (err, data) => {
 		if(!data) {
-			return res.json({message: "User does not exists"});
+			return res.status(404).json({message: "User does not exists"});
 		}
-		return res.json(data);
+		return res.status(200).json(data);
 	})
 };
 
