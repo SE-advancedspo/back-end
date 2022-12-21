@@ -84,7 +84,7 @@ const deleteOneUser = async (req, res) => {
 
 const logoutUser = async (req, res) => {
 	const outUser = await User.findOne({username: req.params.username})
-
+	console.log(req.params.username);
     if(!outUser) {
         res.status(404).json({res: 'User not found'}).send()
         return;
