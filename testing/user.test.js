@@ -10,7 +10,7 @@ describe('test-coverage degli user', () => {
     })
     test('Registrazione di un nuovo utente correttamente', async () => {
         var payload={
-            "username": "Alessandro21",
+            "username": "Alessandro22",
             "email": "franceslini@gmail.com",
             "password": "verde32",
             "contatto": "telegram.com"    
