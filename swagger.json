@@ -46,20 +46,72 @@
       "post": {
         "tags": [ "User" ],
         "summary": "User registration",
-        "parameters": [],
+        "parameters": [{
+          "in": "body",
+          "name": "username",
+          "description": "Username dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "email",
+          "description": "Email dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "password",
+          "description": "Password dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "contatto",
+          "description": "Contatto dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "foto",
+          "description": "Foto dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "bio",
+          "description": "Bio dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "facolta",
+          "description": "Facoltà dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "anno_acc",
+          "description": "Anno accademico dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "regione",
+          "description": "Rergione dell'utente"
+        },
+        {
+          "in": "body",
+          "name": "desc",
+          "description": "Descrizione dell'utente"
+        }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Utente registrato"
+          },
+          "400": {
+            "description": "Utente già esistente"
           }
         }
       },
       "get": {
         "tags": [ "User" ],
         "summary": "Get all users",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Users"
           }
         }
       }
@@ -68,9 +120,20 @@
     "/user/search": {
       "get": {
         "tags": [ "User" ],
-        "summary": "Get the seached user",
-        "parameters": [],
-        "responses": {}
+        "summary": "Get the searched user",
+        "parameters": [{
+          "in": "query",
+          "name": "username",
+          "description": "Username dell'utente da ricercare"
+        }],
+        "responses": {
+          "404": {
+            "description": "Utente ricercato non esiste"
+          },
+          "200": {
+            "$ref": "#definitions/User"
+          }
+        }
       }
     },
 
@@ -78,14 +141,36 @@
       "get": {
         "tags": ["User"],
         "summary": "Get the logged user profile",
-        "parameters": [],
-        "responses": {}
+        "parameters": [{
+          "in": "parameters",
+          "name": "username",
+          "description": "Username dell'utente"
+        }],
+        "responses": {
+          "404": {
+            "description": "Username non esiste"
+          },
+          "200": {
+            "description": "Utente"
+          }
+        }
       },
       "delete": {
         "tags": ["User"],
         "summary": "Logout the user",
-        "parameters": [],
-        "responses": {}
+        "parameters": [{
+          "in": "parameters",
+          "name": "username",
+          "description": "Username dell'utente"
+        }],
+        "responses": {
+          "404": {
+            "description": "Utente non trovato"
+          },
+          "204": {
+            "description": "Logout effettuato"
+          }
+        }
       }
     },
 
