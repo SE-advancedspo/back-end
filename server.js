@@ -6,6 +6,9 @@ const swaggerUi = require('swagger-ui-express')
 var bodyParser = require('body-parser');
 swaggerDocument = require('./swagger.json');
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(
