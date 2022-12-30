@@ -3,11 +3,9 @@ const express=require('express')
 const app=express()
 const mongoose = require('mongoose')
 const swaggerUi = require('swagger-ui-express')
+const cors = require('cors');
 var bodyParser = require('body-parser');
 swaggerDocument = require('./swagger.json');
-
-const cors = require('cors');
-app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,6 +21,7 @@ const listener = app.listen(process.env.PORT || 3000, () => {
 
 const routes = require('./routes/routes')
 app.use('/', routes)
+app.use(cors())
 
 mongoose.connect(
 	process.env.MONGODB_URI,
