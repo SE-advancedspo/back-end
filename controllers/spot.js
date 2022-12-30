@@ -19,7 +19,7 @@ const newSpot = async (req, res) => {
 		const newSpot = new Spot({
       testo: req.body.testo,
       autore: req.body.autore,
-      num_like: req.body.num_like,
+      num_like: 0,
       lang: req.body.lang,
 			desc: req.body.desc
 		})
